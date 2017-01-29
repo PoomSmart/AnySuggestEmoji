@@ -1,0 +1,9 @@
+Package: com.ps.anysuggestemoji
+Name: AnySuggestEmoji
+Depends: mobilesubstrate, firmware (>= 10.0)
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Emoji suggestions anywhere.
+Maintainer: PoomSmart
+Author: PoomSmart
+Section: Tweaks

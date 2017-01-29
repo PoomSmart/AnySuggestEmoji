@@ -1,0 +1,4 @@
+.theos
+obj
+*.txt
+lock.h
