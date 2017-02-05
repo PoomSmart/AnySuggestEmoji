@@ -33,25 +33,6 @@ os_unfair_lock override_lock = OS_UNFAIR_LOCK_INIT;
 @interface CKMessageEntryTextView : EMKTextView
 @end
 
-BOOL fakeEmoji = NO;
-
-NSString *(*standardLanguage)(NSString *);
-%hookf(NSString *, standardLanguage, NSString *lang)
-{
-	return fakeEmoji ? @"emoji" : %orig(lang);
-}
-
-%hook EMKTextView
-
-- (void)setEmojiConversionLanguagesAndActivateConversion:(bool)enabled
-{
-	fakeEmoji = YES;
-	%orig;
-	fakeEmoji = NO;
-}
-
-%end
-
 %group Extend
 
 %hook UITextView
@@ -68,7 +49,22 @@ NSString *(*standardLanguage)(NSString *);
 
 %end
 
+BOOL fakeEmoji = NO;
+
+NSString *(*standardLanguage)(NSString *);
+%hookf(NSString *, standardLanguage, NSString *lang)
+{
+	return fakeEmoji ? @"emoji" : %orig(lang);
+}
+
 %hook EMKTextView
+
+- (void)setEmojiConversionLanguagesAndActivateConversion:(bool)enabled
+{
+	fakeEmoji = YES;
+	%orig;
+	fakeEmoji = NO;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
