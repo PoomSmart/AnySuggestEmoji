@@ -2,17 +2,17 @@ SIMULATOR = 0
 
 ifeq ($(SIMULATOR),1)
 	TARGET = simulator:clang:latest
-	ARCHS = x86_64 i386
+	ARCHS = arm64 x86_64 i386
 else
-	TARGET = iphone:clang:10.2
-	ARCHS = armv7 arm64
+	TARGET = iphone:clang:latest:10.0
 endif
 
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = AnySuggestEmoji
-AnySuggestEmoji_FILES = Tweak.xm
-AnySuggestEmoji_USE_SUBSTRATE = 1
+$(TWEAK_NAME)_FILES = Tweak.x
+$(TWEAK_NAME)_CFLAGS = -fobjc-arc
+$(TWEAK_NAME)_USE_SUBSTRATE = 1
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 

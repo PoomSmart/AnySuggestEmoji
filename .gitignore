@@ -1,4 +1,4 @@
 .theos
-obj
+packages
 *.txt
-lock.h
+.DS_Store
